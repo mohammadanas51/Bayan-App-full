@@ -1,0 +1,129 @@
+/* Desktop-First Default Styling */
+.addUser {
+    border: 2px solid red;
+    width: 30%; /* Wider for larger screens */
+    margin: 50px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    font-family: Arial, sans-serif;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.addUserForm .inputGroup label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.addUserForm .inputGroup input {
+    margin-top: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.inputGroup button {
+    margin-top: 25px;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.login-msg {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+#login-btn {
+    width: 50%;
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#signup-heading {
+    text-align: center;
+    text-transform: uppercase;
+    color: #013220;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Responsive Breakpoints */
+
+/* For tablets and smaller laptops */
+@media (max-width: 1024px) {
+    .addUser {
+        width: 50%; /* Reduce width for smaller screens */
+        padding: 30px;
+    }
+
+    #signup-heading {
+        font-size: 1.4rem; /* Slightly smaller heading */
+    }
+
+    .addUserForm .inputGroup input {
+        font-size: 0.95rem; /* Adjust input text size */
+    }
+
+    .inputGroup button,
+    #login-btn {
+        font-size: 1rem;
+    }
+}
+
+/* For tablets in portrait mode and larger smartphones */
+@media (max-width: 768px) {
+    .addUser {
+        width: 70%; /* Narrower container */
+        padding: 20px;
+    }
+
+    #signup-heading {
+        font-size: 1.3rem;
+    }
+
+    .addUserForm .inputGroup input {
+        font-size: 0.9rem;
+    }
+
+    .inputGroup button,
+    #login-btn {
+        font-size: 0.9rem;
+        width: 70%; /* Wider buttons for easier touch */
+    }
+}
+
+/* For small smartphones */
+@media (max-width: 480px) {
+    .addUser {
+        width: 90%; /* Full-width container */
+        padding: 15px;
+    }
+
+    #signup-heading {
+        font-size: 1.2rem;
+    }
+
+    .addUserForm .inputGroup input {
+        font-size: 0.85rem;
+        padding: 8px; /* Reduce input padding */
+    }
+
+    .inputGroup button,
+    #login-btn {
+        font-size: 0.85rem;
+        width: 100%; /* Full-width buttons for small screens */
+        padding: 10px;
+    }
+}

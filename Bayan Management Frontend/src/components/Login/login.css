@@ -1,0 +1,128 @@
+/* Background image */
+body {
+    background-image: url('/TNTJ_flag.svg.png'); /* Ensure this image is in the public folder */
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+/* Login form container */
+.loginUser {
+    border: 2px solid red;
+    width: 25%; /* Default width for desktop */
+    margin: 50px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    font-family: Arial, sans-serif;
+}
+
+/* Form input and label styling */
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.addUserForm .inputGroup label {
+    margin-top: 10px;
+}
+
+.addUserForm .inputGroup input {
+    margin-top: 5px;
+    padding: 10px;
+}
+
+/* Button styling */
+.inputGroup button {
+    margin-top: 25px;
+}
+
+/* Sign up message */
+.signup-msg {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Sign-up button styling */
+#signup-btn {
+    width: 50%;
+}
+
+/* Login heading */
+#login-heading {
+    text-align: center;
+    text-transform: uppercase;
+    color: #013220;
+}
+
+/* Responsive Design */
+
+/* For tablets and smaller laptops */
+@media (max-width: 1024px) {
+    .loginUser {
+        width: 50%; /* Adjust width for smaller devices */
+        padding: 30px;
+    }
+
+    #login-heading {
+        font-size: 1.4rem;
+    }
+
+    .addUserForm .inputGroup input {
+        font-size: 1rem;
+    }
+
+    .inputGroup button, 
+    #signup-btn {
+        font-size: 1.1rem;
+    }
+}
+
+/* For tablets in portrait mode and larger smartphones */
+@media (max-width: 768px) {
+    .loginUser {
+        width: 70%; /* Adjust width further for smaller tablets */
+        padding: 25px;
+    }
+
+    #login-heading {
+        font-size: 1.3rem;
+    }
+
+    .addUserForm .inputGroup input {
+        font-size: 0.95rem;
+    }
+
+    .inputGroup button, 
+    #signup-btn {
+        font-size: 1rem;
+        width: 70%;
+    }
+}
+
+/* For smaller smartphones */
+@media (max-width: 480px) {
+    .loginUser {
+        width: 90%; /* Full width for small devices */
+        padding: 15px;
+    }
+
+    #login-heading {
+        font-size: 1.2rem;
+    }
+
+    .addUserForm .inputGroup input {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    .inputGroup button, 
+    #signup-btn {
+        font-size: 0.9rem;
+        width: 100%; /* Full width button */
+        padding: 10px;
+    }
+}

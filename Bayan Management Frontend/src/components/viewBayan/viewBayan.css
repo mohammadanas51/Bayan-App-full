@@ -1,0 +1,339 @@
+/* Default (desktop-first) styles */
+#bayan-msg {
+  font-weight: bold;
+  text-align: center;
+  font-size: x-large;
+  width: 50%;
+  margin: 20px auto 20px; /* Reduced margin-top from 40px to 20px */
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 89%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+table td,
+table th {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 8px;
+  text-align: center;
+}
+
+table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th {
+  padding: 12px 0;
+  text-align: center;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.btn-container-outside-modal {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#add-btn-below-msg {
+  margin: 0 10px;
+  padding: 10px 20px;
+  background-color: #FFFF00;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 250px;
+}
+
+#add-btn-below-msg:hover {
+  background-color: #ffcc00;
+}
+
+#clear-btn {
+  margin: 0 10px;
+  padding: 10px 20px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 250px;
+}
+
+#clear-btn:hover {
+  background-color: #cc0000;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.edit-btn,
+.cancel-btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancel-btn i {
+  color: #ffffff;
+}
+
+.cancel-btn:hover {
+  background-color: #d32f2f;
+}
+
+.cancel-btn:hover i {
+  color: #ffffff;
+}
+
+.edit-btn i:hover,
+.cancel-btn i:hover {
+  color: #ffeb3b;
+}
+
+/* Modal styles */
+.add-bayan-modal,
+.cancel-bayan-modal,
+.edit-bayan-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%; /* Adjusted to center vertically with gap */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 20px; /* Added padding for gap */
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+  text-align: center;
+}
+
+.modal-content.error-modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-container,
+.btn-container-inside-modal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Center the OK button in the error modal */
+.btn-container.error-modal {
+  justify-content: center;
+}
+
+.aboutme-logout-btns {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.dateContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.dateContainer label,
+.dateContainer input {
+  margin-right: 10px;
+}
+
+#time {
+  margin-bottom: 10px;
+  width: 65px;
+  margin-left: 10px;
+}
+
+#time-msg,
+#place-msg,
+#speaker-msg {
+  margin-top: 10px;
+}
+
+.date-choose-and-display {
+  margin: 20px 0;
+}
+
+#dates-msg {
+  margin: 40px auto;
+  background-color: white;
+  text-align: center;
+}
+
+/* Error and Loading States */
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 20px;
+  font-size: large;
+}
+
+.loading .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Polished Error Modal Styles */
+.modal-content.error-modal h2 {
+  color: #d32f2f; /* Red for error heading */
+}
+
+.modal-content.error-modal .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 8px 20px;
+  font-size: 16px;
+}
+
+.modal-content.error-modal .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Responsive design */
+@media only screen and (max-width: 768px) {
+  #bayan-msg {
+    font-size: large;
+    width: 80%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .btn-container-outside-modal {
+    flex-direction: column;
+  }
+
+  #add-btn-below-msg,
+  #clear-btn {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .modal-content {
+    width: 90%;
+    top: 60%; /* Adjust for smaller screens */
+  }
+
+  .btn-container,
+  .btn-container-inside-modal {
+    flex-direction: column;
+  }
+
+  .dropdown-menu {
+    position: static;
+    z-index: 1050;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #bayan-msg {
+    font-size: medium;
+    width: 90%;
+  }
+
+  table {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+    top: 65%; /* Further adjust for smaller screens */
+  }
+
+  .btn-container,
+  .btn-container-inside-modal {
+    flex-direction: column;
+  }
+
+  #add-btn-below-msg,
+  #clear-btn {
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+
+  .aboutme-logout-btns {
+    justify-content: space-evenly;
+  }
+
+  .dateContainer {
+    flex-direction: column;
+  }
+
+  .dateContainer label,
+  .dateContainer input {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}

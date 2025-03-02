@@ -11,7 +11,16 @@ const userSchema = new mongoose.Schema({
         type : String , 
         required : true,
     },
-});
+
+    role : {
+        type : String ,
+        required : true ,
+        enum : ["Scheduler", "Daiee"],
+    }
+},{
+    timestamps : true ,
+}
+);
 
 
 // Creating a model named User for the userSchema

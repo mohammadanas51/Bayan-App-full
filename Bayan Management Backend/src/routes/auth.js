@@ -2,23 +2,25 @@ const express = require("express");
 const bcrypt  = require("bcrypt");
 const User = require("../models/user");
 const router = express.Router() ;
-
+const jwt = require("jsonwebtoken");
 
 // Signup Route 
 router.post("/signup",async(req,res)=>{
-    const { userName , password } = req.body ; 
+    const { userName , password , role } = req.body ; 
     try {
         const exisitingUser = await User.findOne({ userName });
         if(exisitingUser){
             return res.status(400).json({ message : "User already registered"});
         }
         const hashedPassword = await bcrypt.hash(password , 10);
-        const newUser = new User ({ userName , password : hashedPassword });
+        const newUser = new User ({ userName , password : hashedPassword, role });
         await newUser.save();
         res.status(201).json({ message : "User created Successfully"});
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message : "Server error during signup"});
+        console.log("Signup error:", error.message); // More specific error logging
+        console.log("Stack trace:", error.stack);
+        res.status(500).json({ message : "Server error during signup",error: error.message });
     }
 });
 
@@ -45,11 +47,21 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ message: "Invalid Password" });
         }
 
+        const token = jwt.sign(
+            {id : user._id, role : user.role},
+            process.env.JWT_SECRET,
+            {expiresIn: "1h"}
+        );
+
         // Respond with success if credentials are valid
-        res.status(200).json({ message: "Login Successful", user });
+        res.status(200).json({ 
+            message: "Login Successful", 
+            user: { _id: user._id, userName: user.userName, role: user.role }, 
+            token 
+        });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error during login" });
+        res.status(500).json({ message: "Server Error during login" , error: error.message });
     }
 });
 

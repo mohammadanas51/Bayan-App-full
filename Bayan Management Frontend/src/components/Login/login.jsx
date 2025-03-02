@@ -1,34 +1,30 @@
-import React, { useState } from 'react';
-import './login.css'; 
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios'; 
+// src/components/Login/Login.jsx
+import React, { useState, useContext } from "react";
+import "./login.css";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
 
 const Login = () => {
-    const [userName, setUserName] = useState(""); // State to store username
-    const [password, setPassword] = useState(""); // State to store password
-    const [error, setError] = useState(""); // State to store error message (if any)
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    // Handle form submit
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission
-
+        e.preventDefault();
+        setError("");
         try {
-            const response = await axios.post("http://localhost:8080/api/auth/login", { userName, password });
-
-            if (response.status === 200) {
-                // Redirect to the dashboard (or another page) after successful login
+            const role = await login(userName, password);
+            if (role === "Scheduler") {
                 navigate("/viewbayan");
+            } else if (role === "Daiee") {
+                navigate("/speakerview");
+            } else {
+                setError("Unknown role");
             }
         } catch (error) {
-            // Handle errors from the backend
-            if (error.response) {
-                // If there's a response from the backend, show the error message
-                setError(error.response.data.message);
-            } else {
-                // If no response from backend (network error, etc.), show a generic error
-                setError("An error occurred. Please try again later.");
-            }
+            setError(error.response?.data?.message || "An error occurred. Please try again.");
         }
     };
 
@@ -44,9 +40,8 @@ const Login = () => {
                         autoComplete="off"
                         placeholder="Username"
                         value={userName}
-                        onChange={(e) => setUserName(e.target.value)} // Update username state
+                        onChange={(e) => setUserName(e.target.value)}
                     />
-
                     <label htmlFor="password" id="passwordLabel">Password</label>
                     <input
                         type="password"
@@ -54,18 +49,14 @@ const Login = () => {
                         autoComplete="off"
                         placeholder="Password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)} // Update password state
+                        onChange={(e) => setPassword(e.target.value)}
                     />
-
                     <button type="submit" className="btn btn-success">
                         Log In
                     </button>
                 </div>
             </form>
-
-            {/* Display error message if any */}
             {error && <p className="error-message">{error}</p>}
-
             <div className="signup-msg">
                 <p>Do not have an account?</p>
                 <Link to="/signup">

@@ -1,52 +1,39 @@
-import React, { useState } from 'react';
-import './signup.css';
-import { Link, useNavigate } from 'react-router-dom';
+// src/components/Signup.jsx
+import React, { useState, useContext } from "react";
+import "./signup.css";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
 
 const Signup = () => {
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [role, setRole] = useState("Scheduler"); // Default to Scheduler
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const { signup } = useContext(AuthContext); // Use signup from context
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();
-        setError('');
-        setSuccess('');
+        setError("");
+        setSuccess("");
 
-        // Input validation
-        if (!userName || !password || !confirmPassword) {
-            setError('All fields are required');
+        if (!userName || !password || !confirmPassword || !role) {
+            setError("All fields are required");
             return;
         }
         if (password !== confirmPassword) {
-            setError('Passwords do not match');
+            setError("Passwords do not match");
             return;
         }
 
         try {
-            const response = await fetch('http://localhost:8080/api/auth/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ userName, password }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setSuccess('Signup successful!');
-                setTimeout(() => {
-                    navigate('/login'); // Redirect to login page after success
-                }, 2000);
-            } else {
-                setError(data.message || 'Signup failed');
-            }
+            await signup(userName, password, role);
+            setSuccess("Signup successful!");
+            setTimeout(() => navigate("/login"), 2000);
         } catch (err) {
-            console.error(err);
-            setError('An error occurred. Please try again later.');
+            setError(err.message || "An error occurred. Please try again.");
         }
     };
 
@@ -64,7 +51,6 @@ const Signup = () => {
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
                     />
-
                     <label htmlFor="password" id="passwordLabel">Password</label>
                     <input
                         type="password"
@@ -74,8 +60,7 @@ const Signup = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-
-                    <label htmlFor="password" id="confirmpasswordLabel">Confirm Password</label>
+                    <label htmlFor="confirmPassword" id="confirmpasswordLabel">Confirm Password</label>
                     <input
                         type="password"
                         id="confirmpasswordBox"
@@ -84,16 +69,22 @@ const Signup = () => {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-
+                    <label htmlFor="role" id="roleLabel">Role</label>
+                    <select
+                        id="roleBox"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                    >
+                        <option value="Scheduler">Scheduler</option>
+                        <option value="Daiee">Daiee</option>
+                    </select>
                     <button type="submit" className="btn btn-success">
                         Sign Up
                     </button>
                 </div>
             </form>
-
             {error && <p className="error-msg">{error}</p>}
             {success && <p className="success-msg">{success}</p>}
-
             <div className="login-msg">
                 <p>Have an account?</p>
                 <Link to="/login">

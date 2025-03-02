@@ -4,7 +4,7 @@
   const cors = require("cors");
   const authRoutes = require("./routes/auth");
   const bayanRoutes = require("./routes/bayan");
-
+  const dotenv = require("dotenv").config();
 
   const app = express();
   const PORT = 8080 ;

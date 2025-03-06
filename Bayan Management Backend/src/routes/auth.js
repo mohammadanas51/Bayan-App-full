@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 // Signup Route 
 router.post("/signup",async(req,res)=>{
     const { userName , password , role } = req.body ; 
+    console.log("Signup request received:", { userName, role });
     try {
         const exisitingUser = await User.findOne({ userName });
         if(exisitingUser){
@@ -36,7 +37,9 @@ router.post("/login", async (req, res) => {
 
     try {
         // Check if the user exists in the database
+        console.log("Querying user:", userName);
         const user = await User.findOne({ userName });
+        console.log("Query result:", user);
         if (!user) {
             return res.status(400).json({ message: "Invalid Username" });
         }

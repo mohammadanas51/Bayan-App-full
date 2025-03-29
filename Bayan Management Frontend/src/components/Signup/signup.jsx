@@ -11,20 +11,24 @@ const Signup = () => {
     const [role, setRole] = useState("Scheduler"); // Default to Scheduler
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-    const { signup } = useContext(AuthContext); // Use signup from context
+    const [isLoading, setIsLoading] = useState(false); // Added loading state
+    const { signup } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();
         setError("");
         setSuccess("");
+        setIsLoading(true); // Start loading
 
         if (!userName || !password || !confirmPassword || !role) {
             setError("All fields are required");
+            setIsLoading(false);
             return;
         }
         if (password !== confirmPassword) {
             setError("Passwords do not match");
+            setIsLoading(false);
             return;
         }
 
@@ -34,6 +38,8 @@ const Signup = () => {
             setTimeout(() => navigate("/login"), 2000);
         } catch (err) {
             setError(err.message || "An error occurred. Please try again.");
+        } finally {
+            setIsLoading(false); // Stop loading
         }
     };
 
@@ -50,6 +56,7 @@ const Signup = () => {
                         placeholder="Username"
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
+                        disabled={isLoading}
                     />
                     <label htmlFor="password" id="passwordLabel">Password</label>
                     <input
@@ -59,6 +66,7 @@ const Signup = () => {
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        disabled={isLoading}
                     />
                     <label htmlFor="confirmPassword" id="confirmpasswordLabel">Confirm Password</label>
                     <input
@@ -68,18 +76,30 @@ const Signup = () => {
                         placeholder="Confirm Password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        disabled={isLoading}
                     />
                     <label htmlFor="role" id="roleLabel">Role</label>
                     <select
                         id="roleBox"
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
+                        disabled={isLoading}
                     >
                         <option value="Scheduler">Scheduler</option>
                         <option value="Daiee">Daiee</option>
                     </select>
-                    <button type="submit" className="btn btn-success">
-                        Sign Up
+                    <button 
+                        type="submit" 
+                        className="btn btn-success"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? (
+                            <div className="spinner-border text-light spinner-border-sm" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        ) : (
+                            "Sign Up"
+                        )}
                     </button>
                 </div>
             </form>
@@ -88,7 +108,12 @@ const Signup = () => {
             <div className="login-msg">
                 <p>Have an account?</p>
                 <Link to="/login">
-                    <button type="button" className="btn btn-primary" id="login-btn">
+                    <button 
+                        type="button" 
+                        className="btn btn-primary" 
+                        id="login-btn"
+                        disabled={isLoading}
+                    >
                         Log In
                     </button>
                 </Link>
